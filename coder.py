@@ -14,7 +14,7 @@ def get_key():
             print('Ключ должен быть целым числом')
 
 
-def code(message, key):
+def encryption(message, key):
     crypt = ''
     for i in message:
         crypt += chr(ord(i) ^ key)
@@ -22,17 +22,17 @@ def code(message, key):
 
 
 if __name__ == "__main__":
-    z = int(input('1.файл \n2.рукописный ввод \n'))
-    if z == 1:
+    choice = int(input('1.файл \n2.рукописный ввод \n'))
+    if choice == 1:
         file_name = input('разместите файл в дирректории программы и введите его имя: ')
         with open('{}.txt'.format(file_name), 'rt', encoding="utf-8") as f:
             key = get_key()
-            res = code(f.read(), key)
+            res = encryption(f.read(), key)
             with open('{}'.format(file_name + '_crypt.txt'), 'w', encoding="utf-8") as w:
                 w.write(res)
 
-    if z == 2:
+    if choice == 2:
         inp = input('слово: ')
         key = get_key()
-        res = code(inp, key)
+        res = encryption(inp, key)
         print('Результат:', res)
